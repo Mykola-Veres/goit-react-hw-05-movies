@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react"
-// import { Link } from "react-router-dom";
 import * as MoviesAPI from "../../services/fetch-movies-api";
-import {ListMoviesStyled, ItemMoviesStyled} from "./HomePage.styled"
-
-// results
-// title || original_title,   genre_ids[5,4],  backdrop_path + poster_path +...,   overview:,   id:
-  // MoviesAPI.fetchMoviesAPI().
+import MoviesList from "../MoviesList";
+import {TitleStyled} from "./HomePage.styled"
 
   const useFetchTrendMovies = () => {
     const [items, setItems] = useState([]);
@@ -30,11 +26,9 @@ export default function HomePage() {
 
   return(
     <div>
-      <h1>Trending today</h1>
-      {loading && "Loading"}
-      <ListMoviesStyled>{
-        items.map(item => (<ItemMoviesStyled to={`movies/${item.id}`} key={item.id}>{item.title ?? item.original_title ?? item.name}</ItemMoviesStyled>))
-        }</ListMoviesStyled>
+      <TitleStyled>Trending today</TitleStyled>
+      {loading && <p>Loading...</p>}
+      {items && <MoviesList items={items}></MoviesList>}  
     </div>
   )
 }

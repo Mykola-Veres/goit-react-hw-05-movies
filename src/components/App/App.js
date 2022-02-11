@@ -6,23 +6,26 @@ import MovieDetailsPage from "../MovieDetailsPage";
 import { Toaster } from 'react-hot-toast';
 import Cast from "../Cast";
 import Reviews from "../Reviews";
+import {AppStyled} from "./App.styled";
+
+
 
 export default function App () {
   return(
-  <main>
+  <AppStyled>
     <Toaster
       position="top-center"
       reverseOrder={false}/>  
     <Navigation />
     <Routes>   
       <Route path="/" element={<HomePage/>}/>  
-      <Route path="movies" element={<MoviesPageSearch/>}/>
-      <Route path="movies/:movieId" element={<MovieDetailsPage/>}>
+      <Route path="/movies" element={<MoviesPageSearch/>}/>
+      <Route path="/movies/:movieId" element={<MovieDetailsPage/>}>
         <Route path="/movies/:movieId/cast" element={<Cast/>}/>
         <Route path="/movies/:movieId/reviews" element={<Reviews/>}/>
       </Route>
       <Route path="*" element={<Navigate to="/"/>}/>   
     </Routes>
-  </main>
+  </AppStyled>
   )
 };

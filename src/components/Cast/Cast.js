@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom"
 import * as MoviesAPI from "../../services/fetch-movies-api";
 
@@ -7,14 +8,26 @@ export default function Cast () {
   const [cast, setCast] = useState(null) 
 
   useEffect (() => {
-    MoviesAPI.fetchMoviesCredits(movieId).then(item => item.cast).then(setCast)    
-  }, [movieId])  
+    async function fetchCredits () {
+      try {
+        if (!movieId) {return}
+        const fetchCredits = await MoviesAPI.fetchMoviesCredits(movieId).then(item => item.cast)
+        setCast(fetchCredits)
+      }
+      catch(error) {
+        toast.error("This didn't work. No cast of actors!")
+      }
+    }
+    fetchCredits()
+  }, [movieId])
 
   return(
     <ul>
         {cast && cast.map(item => (
-      <li key={item.id}>
-        <div><img src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`} alt={item.name} />
+      <li key={item.id} >
+        <div>
+          <img src={item.profile_path ? `https://image.tmdb.org/t/p/w200/${item.profile_path}` : <p>No available foto of actor!</p>}
+            alt={item.name} />
         </div>
         <p>{item.name}</p>
         <p>Character: {item.character}</p>
@@ -22,7 +35,3 @@ export default function Cast () {
       ))}
     </ul>    
   )}
-
-  // id profile_path name character /zsfsydnW2joe6sRP62gF1OeNeQN.jpg
-
-  //https://image.tmdb.org/t/p/w500/zsfsydnW2joe6sRP62gF1OeNeQN.jpg
