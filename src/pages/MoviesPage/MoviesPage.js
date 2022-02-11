@@ -3,10 +3,12 @@ import toast from "react-hot-toast";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useLocation, useSearchParams } from "react-router-dom"
 import * as MoviesAPI from "../../services/fetch-movies-api"
-import MoviesList from "../MoviesList";
-import {SearchStyled, FormStyled, ButtonStyled} from "./MoviesPage.styled"
+import MoviesList from "../../components/MoviesList";
+import {SearchStyled, FormStyled, ButtonStyled} from "./MoviesPage.styled";
+import Loader from "../../components/Loader";
 
 export default function MoviesPageSearch () {
+const [loading, setLoading] = useState(false);
 const [movies, setMovies] = useState(null)
 const [searchParams, setSearchParams] = useSearchParams();
 const location = useLocation();
@@ -21,6 +23,7 @@ const query = searchParams.get("query")
   useEffect (()=> {
     if (!query) {return}
     async function fetchMoviesQ () {
+      setLoading(true)
       try {
         const fetchMovies = await MoviesAPI.fetchMoviesQuery(query).then(item => item.results)
         setMovies(fetchMovies)
@@ -28,6 +31,7 @@ const query = searchParams.get("query")
       catch(error) {
         toast.error("This didn't work. Thumping went wrong! Try again!!!")
       }
+      finally{setLoading(false)}
     }
     fetchMoviesQ ()    
   },[query])
@@ -52,6 +56,7 @@ return(
       <span>search</span>
     </ButtonStyled>
   </FormStyled>
+  {loading && <Loader/>}
   {movies && <MoviesList items={movies}></MoviesList>}
   </>
 )}

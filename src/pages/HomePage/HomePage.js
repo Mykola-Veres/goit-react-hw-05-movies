@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import * as MoviesAPI from "../../services/fetch-movies-api";
-import MoviesList from "../MoviesList";
-import {TitleStyled} from "./HomePage.styled"
+import MoviesList from "../../components/MoviesList";
+import {TitleStyled} from "./HomePage.styled";
+import Loader from "../../components/Loader";
 
   const useFetchTrendMovies = () => {
     const [items, setItems] = useState([]);
@@ -27,7 +28,7 @@ export default function HomePage() {
   return(
     <div>
       <TitleStyled>Trending today</TitleStyled>
-      {loading && <p>Loading...</p>}
+      {loading && <Loader/>}
       {items && <MoviesList items={items}></MoviesList>}  
     </div>
   )

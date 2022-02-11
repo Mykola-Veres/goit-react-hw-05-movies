@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import {ListMoviesStyled, ItemMoviesStyled} from "./MoviesList.styled";
+import PropTypes from 'prop-types';
 
 export default function MoviesList({items}) {
   const location = useLocation();  
@@ -13,3 +14,8 @@ export default function MoviesList({items}) {
         </ItemMoviesStyled>)}
     </ListMoviesStyled>  
     )}
+
+    MoviesList.propTypes = {
+      items: PropTypes.array.isRequired    
+    };
+  

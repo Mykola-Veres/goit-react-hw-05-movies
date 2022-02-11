@@ -24,11 +24,15 @@ background-color: rgba(255, 255, 128, .9);
 export const LinkStyled = styled(Link)`
 padding: 20px;
 border-radius: 8px;
-font-size: 24px;
+font-size: 18px;
 text-align: center;
 `;
 
 export const TitleStyled = styled.h3`
 padding-top: 30px;
 padding-left: 30px;
+`;
+
+export const ListInfoMoviesStyled = styled.li`
+padding-bottom: 30px;
 `;
