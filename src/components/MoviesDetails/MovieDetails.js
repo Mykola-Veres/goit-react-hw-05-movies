@@ -3,6 +3,7 @@ import {MoviesDetailsConteinerStyled, ConteinerImagesMovies, LinkStyled, TitleSt
 import ImageDummy from "../../images/ImageDummy.png";
 import {ListAdditionalStyled, ItemAdditionalStyled, ListInfoMoviesStyled} from "./MovieDetails.styled";
 import PropTypes from 'prop-types';
+import { Suspense } from "react";
 
 export default function MovieDetails({item: {title, name, poster_path, backdrop_path, vote_average, overview, genres}}) {
   const {movieId} = useParams();
@@ -26,13 +27,16 @@ export default function MovieDetails({item: {title, name, poster_path, backdrop_
       </MoviesDetailsConteinerStyled>
         <div>
           <TitleStyled>Additional information</TitleStyled>
+          
           <ListAdditionalStyled>
             <ItemAdditionalStyled><LinkStyled to={`/movies/${movieId}/cast`} state={{from: locationCast?.state?.from || "/" }}>Cast</LinkStyled>
             </ItemAdditionalStyled>
             <ItemAdditionalStyled><LinkStyled to={`/movies/${movieId}/reviews`} state={{from: locationCast?.state?.from || "/" }}>Reviews</LinkStyled>  
             </ItemAdditionalStyled>
           </ListAdditionalStyled>
-          <Outlet />      
+          <Suspense>
+            <Outlet />  
+          </Suspense>
         </div>
       </>   
   )}
