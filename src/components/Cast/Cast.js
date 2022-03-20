@@ -5,7 +5,7 @@ import * as MoviesAPI from "../../services/fetch-movies-api";
 
 export default function Cast () {
   const {movieId} = useParams()
-  const [cast, setCast] = useState(null) 
+  const [cast, setCast] = useState(null)
 
   useEffect (() => {
     async function fetchCredits () {
@@ -33,5 +33,5 @@ export default function Cast () {
         <p>Character: {item.character}</p>
       </li>
       ))}
-    </ul>    
+    </ul>
   )}
