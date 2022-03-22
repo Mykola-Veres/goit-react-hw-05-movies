@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom"
 import * as MoviesAPI from "../../services/fetch-movies-api";
+import {ListMoviesStyled} from "./Cast.styled"
 
 export default function Cast () {
   const {movieId} = useParams()
@@ -22,7 +23,7 @@ export default function Cast () {
   }, [movieId])
 
   return(
-    <ul>
+    <ListMoviesStyled>
         {cast && cast.map(item => (
       <li key={item.id} >
         <div>
@@ -33,5 +34,5 @@ export default function Cast () {
         <p>Character: {item.character}</p>
       </li>
       ))}
-    </ul>
+    </ListMoviesStyled>
   )}

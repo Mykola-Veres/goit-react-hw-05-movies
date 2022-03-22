@@ -1,12 +1,12 @@
-import {NavLinkStyled, NavStyled} from "./Navigation.styled";
+import {NavLinkStyled, NavStyled, NavConteinerStaled} from "./Navigation.styled";
 
 export default function Navigation() {
   return(
-    <div>      
-      <NavStyled>        
+    <NavConteinerStaled>
+      <NavStyled>
         <NavLinkStyled to="/">Home</NavLinkStyled>
         <NavLinkStyled to="/movies">Movies</NavLinkStyled>
-      </NavStyled>   
-    </div>
+      </NavStyled>
+    </NavConteinerStaled>
   )
 }

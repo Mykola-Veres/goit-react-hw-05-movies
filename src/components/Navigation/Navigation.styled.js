@@ -15,10 +15,27 @@ export const NavLinkStyled = styled(NavLink)`
 }
 width: 120px;
 background-color: rgb(255, 255, 128);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 25px;
   padding: 5px;
   cursor: pointer;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+  transition: transform 250ms linear;
+  border-radius: 15px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  :hover,
+  :focus {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+counter-increment: section;
+::before{
+content: counters(section,".") ". ";
+color: red;
+font-weight: bold;
+}
 `;
 
+export const NavConteinerStaled = styled.div`
+background-color: ${props => props.theme.colors.greyOpacity};
+border-radius: 15px;
+`;
